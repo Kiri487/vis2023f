@@ -178,14 +178,33 @@
   <!-- ------------------------------------------------>
   <div class="row hw12">
     <div class="col-md-12 twenty">
-      該次作業程式碼，請放在 https://github.com/<span style="color:red;">你的帳號</span>/vis2023f/hw<span style="color:red;">02</span>/src/ 檔案夾。
+      src 資料夾 <input type="button" name="back" onclick="location.href='https://github.com/Kiri487/vis2023f/tree/main/hw02/src'" value="開啟 hw2 src"> 
     </div>
   </div>
 
   <!-- ------------------------------------------------>
   <div class="row hw12">
     <div class="col-md-12 twenty">
-      心得報告 105 字。心得報告 105 字。心得報告 105 字。心得報告 105 字。心得報告 105 字。心得報告 105 字。心得報告 105 字。心得報告 105 字。心得報告 105 字。心得報告 105 字。心得報告 105 字。心得報告 105 字。心得報告 105 字。心得報告 105 字。心得報告 105 字。
+      <h4>Demo 網頁</h4>
+    </div>
+  </div>
+
+  <!-- ------------------------------------------------>
+  <div class="row hw12">
+    <div class="col-md-12 twenty">
+      <a href="https://Kiri487.github.io/vis2023f/hw02/src/simple/">Simple baseline</a>
+      <hr>
+      <a href="https://Kiri487.github.io/vis2023f/hw02/src/medium/">Medium baseline</a>   
+      <hr>
+      <a href="https://Kiri487.github.io/vis2023f/hw02/src/strong/">Strong baseline</a>
+      </div>
+  </div>
+
+  <!-- ------------------------------------------------>
+  <div class="row hw12">
+    <div class="col-md-12 twenty">
+      這是我第一次使用 Observable，在資料可視化的部分是個很方便的工具，有蠻多可以選擇的圖表類型，小小的缺點就是我覺得他的官方文件寫的不夠清楚，很多圖表的格式語法都要自己另外查詢寫法，讓我在這部分花了不少時間。<br>
+      另外 Iframe 的圖表真的很常會跑不出來，若助教也遇到此問題，再麻煩您直接到 Demo 網頁或 Observable 看，非常感謝。
     </div>
   </div>
 
@@ -201,37 +220,82 @@
         </tr>
         <tr>
           <td rowspan="7" id="myTotal"></td>
-          <td><input type="checkbox" class="flipswitch" id="myCheckbox1"></td>
+          <td><input type="checkbox" class="flipswitch" id="myCheckbox1" checked></td>
           <td id='m1'>2</td>
-          <td>Simple baseline - 描述、描述、描述</td>
+          <td>Simple baseline-1 - 以 histogram 呈現每個年份出生的人數</td>
         </tr>
         <tr>
           <td><input type="checkbox" class="flipswitch" id="myCheckbox2" checked></td>
-          <td id='m2'>6</td>
-          <td>Medium baseline - 描述、描述、描述 </td>
+          <td id='m2'>2</td>
+          <td>Simple baseline-2 - 可調整 margin, fill color, tip</td>
         </tr>
         <tr>
-          <td><input type="checkbox" class="flipswitch" id="myCheckbox3"></td>
+          <td><input type="checkbox" class="flipswitch" id="myCheckbox3" checked></td>
           <td id='m3'>2</td>
-          <td>Strong baseline - 描述、描述、描述 </td>
+          <td>Medium baseline-1 - 以 bar chart 呈現每個年份出生的人數</td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" class="flipswitch" id="myCheckbox4" checked></td>
+          <td id='m4'>2</td>
+          <td>Medium baseline-2 - 可調整 margin, fill color, tip</td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" class="flipswitch" id="myCheckbox5" checked></td>
+          <td id='m5'>1</td>
+          <td>Strong baseline-1 - 以 bar chart 呈現每個星座的人數</td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" class="flipswitch" id="myCheckbox6" checked></td>
+          <td id='m6'>1</td>
+          <td>Strong baseline-2 - 以 histogram 呈現每個星座的人數</td>
         </tr>
       </table>
     </div>
   </div>
 
-  <!-- ------------------------------------------------>
-  <div class="row hw12">
-    <div class="col-md-12 twenty">
-      <video id="video1" style="width:100%;max-width:100%;" controls="">
-        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-      </video>
-    </div>
+<!-- ------------------------------------------------>
+<div class="row hw12">
+  <div class="col-md-12 twenty">
+     <h4>Simple baseline - 以 histogram 呈現每個年份出生的人數，可調整 margin, fill color, tip</h4>
   </div>
+</div>
 
-  <!-- ------------------------------------------------>
+<div class="row hw12">
+  <div class="col-md-12 twenty">
+    <iframe width="100%" height="500" frameborder="0" style="background-color: #FFFFFF"
+  src="https://observablehq.com/embed/2ec423b3274d966d?cell=*"></iframe>
+  </div>
+</div>
 
-  <!-- ------------------------------------------------>
+<!-- ------------------------------------------------>
+<div class="row hw12">
+  <div class="col-md-12 twenty">
+     <h4>Medium baseline - 以 bar chart 呈現每個年份出生的人數，可調整 margin, fill color, tip</h4>
+  </div>
+</div>
 
+<div class="row hw12">
+  <div class="col-md-12 twenty">
+    <iframe width="100%" height="500" frameborder="0" style="background-color: #FFFFFF"
+  src="https://observablehq.com/embed/431e7b04ac4d0f4c?cell=*"></iframe>
+  </div>
+</div>
+
+<!-- ------------------------------------------------>
+<div class="row hw12">
+  <div class="col-md-12 twenty">
+     <h4>Strong baseline - 分別以 bar chart 和 histogram 呈現每個星座的人數</h4>
+  </div>
+</div>
+
+<div class="row hw12">
+  <div class="col-md-12 twenty">
+    <iframe width="100%" height="500" frameborder="0" style="background-color: #FFFFFF"
+  src="https://observablehq.com/embed/b53424d28ffa4c7e?cell=*"></iframe>
+  </div>
+</div>
+
+<!-- ------------------------------------------------>
 
 <script>
   $(function() {
@@ -252,23 +316,28 @@
   update();
   
   function update(){
-
     var score = 0;
 
     if (d3.select("#myCheckbox1").property("checked")){
       score += parseInt(d3.select('#m1').html());
     }
-
     if (d3.select("#myCheckbox2").property("checked")){
       score += parseInt(d3.select('#m2').html());   
     }
-
     if (d3.select("#myCheckbox3").property("checked")){
       score += parseInt(d3.select('#m3').html());   
     }
-
+    if (d3.select("#myCheckbox4").property("checked")){
+      score += parseInt(d3.select('#m4').html());
+    }
+    if (d3.select("#myCheckbox5").property("checked")){
+      score += parseInt(d3.select('#m5').html());   
+    }
+    if (d3.select("#myCheckbox6").property("checked")){
+      score += parseInt(d3.select('#m6').html());   
+    }
     d3.select("#myTotal").html(score);    
-  }
+    }
 </script>
 
 </body>
