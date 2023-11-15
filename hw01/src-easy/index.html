@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HW1 Simple baseline (2pt)</title>
+    <meta charset="UTF-8">
+    <style type="text/css">
+        header {
+            display: flex;
+            margin: 2vw;
+        }
+
+        button {
+            height: 40px;
+            margin: auto 20px;
+        }
+        
+        table, th, td {
+            border: 1px solid black;
+            margin: 2vw;
+            padding: 1px 3px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>HW1 Simple baseline (2pt)</h1>
+        <button id="convert-button" type="button">
+            download CSV
+        </button>
+    </header>
+    <script src="../hw01.js"></script>
+    <table id="student-table"></table>
+    <script>
+        document.getElementById("student-table").innerHTML = generateStudentTable();
+        document.getElementById("convert-button").addEventListener("click", tableToCSV);
+    </script>
+</body>
+</html>
