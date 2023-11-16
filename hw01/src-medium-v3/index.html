@@ -4,7 +4,6 @@
     <title>HW2 Medium baseline - v3 (3pt)</title>
     <script src="https://d3js.org/d3.v3.min.js"></script>
     <style>
-        /* @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@900&display=swap'); */
 
         @font-face {
             font-family:'CircleFont'; /* src: url(https://circle472.github.io/ct2022s/hw04/CircleFont.ttf);  https://github.com/circle472/ct2022s/ */
@@ -45,7 +44,6 @@
             border: 2px black solid;
             font-family: 'CircleFont', 'Noto Serif JP', serif;
             font-size: 16pt;
-            /* font: 16px sans-serif; */
             margin-left: auto;
             margin-right: auto;
             margin-top: 10px;
@@ -68,7 +66,6 @@
             transition-duration: 0.5s;
             width: 50px;
             height: 50px;
-            /* display: block; */
             margin-left: auto;
             margin-right: auto;
         }
@@ -76,24 +73,6 @@
         img:hover {
             box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
         }
-
-        /*
-        .excellent-kid {
-            background-color: skyblue;
-        }
-
-        .good-kid {
-            background-color: pink;
-        }
-
-        .fair-kid {
-            background-color: pink;
-        }
-
-        .poor-kid {
-            background-color: pink;
-        }
-        */
 
         td:hover img {
             transition: width, height;
@@ -144,14 +123,13 @@
     </style>
 </head>
 <body>
+    <h1>HW2 Medium baseline - v3 (3pt)</h1>
     <h3>Data Visualization 成績</h3>
-
-    <div id="div1"></div>
-
-    <div id="div2"></div>
+    <div id="score-table"></div>
+    <div id="student-table"></div>
     <script type="text/javascript" charset="utf-8">
 
-        d3.select("#div1")
+        d3.select("#score-table")
             .append("table")
             .append("tr")
             .selectAll("td")
@@ -163,6 +141,7 @@
                     return d;
                 }
             })
+            
             // img
             .attr("class", function (d, i) { 
                 if (d == 10) return "excellent-kid"; 
@@ -170,19 +149,10 @@
                 else if (d >= 2 ) return "fair-kid"; 
                 else return "poor-kid";})
             .append("img")
-            .attr("src", function (d, i) { 
-                if (d == 10) return "../appleSVG/10.svg";
-                else if (d == 9) return "../appleSVG/9.svg";
-                else if (d == 8) return "../appleSVG/8.svg";
-                else if (d == 7) return "../appleSVG/7.svg";
-                else if (d == 6) return "../appleSVG/6.svg";
-                else if (d == 5) return "../appleSVG/5.svg";
-                else if (d == 4) return "../appleSVG/4.svg";
-                else if (d == 3) return "../appleSVG/3.svg";
-                else if (d == 2) return "../appleSVG/2.svg";
-                else if (d == 1) return "../appleSVG/1.svg";
-                else if (d == 0) return "../appleSVG/0.svg";
-                else return "../appleSVG/-1.svg"; })
+            .attr("src", function (d, i) {
+                if (d >= 0 && d <= 10) return "../appleSVG/" + d + ".svg";
+                else return "../appleSVG/-1.svg";
+            })
             .attr("x", "0")
             .attr("y", "0")
             .attr("width",  function(d, i) { return (i + 1) * 60; })
@@ -191,11 +161,9 @@
 
     d3.text("../studentTable.csv", function (data) {
 
-        //var parsedCSV = d3.csv.parseRows(data);
         parsedCSV = d3.csv.parseRows(data);
-        //console.log(parsedCSV);
 
-        var container = d3.select("#div2")
+        var container = d3.select("#student-table")
             .append("table")
             .selectAll("tr")
             .data(parsedCSV)
@@ -220,30 +188,8 @@
                 else return "poor-kid";})
             .append("img")
             .attr("src", function (d, i) {
-                if (d == 10) 
-                    return "../appleSVG/10.svg";
-                else if (d == 9) 
-                    return "../appleSVG/9.svg";
-                else if (d == 8) 
-                    return "../appleSVG/8.svg";
-                else if (d == 7) 
-                    return "../appleSVG/7.svg";
-                else if (d == 6) 
-                    return "../appleSVG/6.svg";
-                else if (d == 5) 
-                    return "../appleSVG/5.svg";
-                else if (d == 4) 
-                    return "../appleSVG/4.svg";
-                else if (d == 3) 
-                    return "../appleSVG/3.svg";
-                else if (d == 2) 
-                    return "../appleSVG/2.svg";
-                else if (d == 1) 
-                    return "../appleSVG/1.svg";
-                else if (d == 0) 
-                    return "../appleSVG/0.svg";
-                else 
-                    return "../appleSVG/-1.svg";
+                if (d >= 0 && d <= 10) return "../appleSVG/" + d + ".svg";
+                else return "../appleSVG/-1.svg";
             })
             .attr("width", 50)
             .attr("height", 50)
