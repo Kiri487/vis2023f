@@ -20,26 +20,6 @@
         let homeworks = ["作業一", "作業二", "作業三", "作業四", "作業五", "作業六", "作業七", "作業八", "作業九", "作業十"];
         let studentArray = [];
         
-        d3.csv("../studentTable.csv").then(function(_data) {
-            data = _data;
-        
-            studentArray.length = 0;
-            data.forEach(row => {
-                let Class = row["班級"];
-                let Id = row["學號"];
-                let Name = row["姓名"];
-                for (let i = 0; i < 10; i++) {
-                    studentArray.push({
-                        Class: Class,
-                        ID: Id,
-                        Name: Name,
-                        HW: i + 1,
-                        value: row[homeworks[i]]
-                    });
-                }
-            });
-        });
-
         let svg = d3.select("#score-table").append("svg")
             .attr("width", 1000)
             .attr("height", 100)
@@ -72,68 +52,88 @@
             .attr("transform", "translate(" + 450 + " ," + 100 + ")")
             .style("text-anchor", "middle")
             .text("Total Score");
+            
+        d3.csv("../studentTable.csv").then(function(_data) {
+            data = _data;
+        
+            studentArray.length = 0;
+            data.forEach(row => {
+                let Class = row["班級"];
+                let Id = row["學號"];
+                let Name = row["姓名"];
+                for (let i = 0; i < 10; i++) {
+                    studentArray.push({
+                        Class: Class,
+                        ID: Id,
+                        Name: Name,
+                        HW: i + 1,
+                        value: row[homeworks[i]]
+                    });
+                }
+            });
 
-        let HWs = Array.from(d3.group(studentArray, d => + d.HW).keys()).sort(d3.ascending);
-        let series = d3.groups(studentArray, d => d.Name).map(([Name, values]) => {
-            let value = new Map(values.map(d => [+d.HW, d.value]));
-            return {name: `${values[0].Class} ${values[0].ID} ${Name}`, values: HWs.map(d => value.get(d))};
+            let HWs = Array.from(d3.group(studentArray, d => + d.HW).keys()).sort(d3.ascending);
+            let series = d3.groups(studentArray, d => d.Name).map(([Name, values]) => {
+                let value = new Map(values.map(d => [+d.HW, d.value]));
+                return {name: `${values[0].Class} ${values[0].ID} ${Name}`, values: HWs.map(d => value.get(d))};
+            });
+            let totalScores = series.map(d => d3.sum(d.values));
+
+            let overlap = 5;
+            let width = 1200;
+            let height = 3000;
+            let marginTop = 100;
+            let marginBottom = 30;
+            let marginRight = 30;
+            let marginLeft = 120;
+
+            let x = d3.scaleLinear()
+                .domain([1, 10])
+                .range([marginLeft, width - marginRight]);
+
+            let y = d3.scalePoint()
+                .domain(series.map(d => d.name))
+                .range([marginTop, height - marginBottom]);
+
+            let z = d3.scaleLinear()
+                .domain([0, d3.max(series, d => d3.max(d.values))]).nice()
+                .range([0, -overlap * y.step() * 0.5])
+
+            let area = d3.area()
+                .curve(d3.curveBasis)
+                .defined(d => !isNaN(d))
+                .x((d, i) => x(HWs[i]))
+                .y0(0)
+                .y1(d => z(d));
+
+            let svg2 = d3.select("#student-table").append("svg")
+                .attr("width", width)
+                .attr("height", height)
+                .attr("viewBox", [0, 0, width, height])
+                .attr("style", "max-width: 100%; height: auto;");
+
+            svg2.append("g")
+                .attr("transform", `translate(0,${height - marginBottom})`)
+                .call(d3.axisBottom(x)
+                    .ticks(10)
+                    .tickFormat(d => homeworks[d - 1])
+                    .tickSizeOuter(0));
+
+            svg2.append("g")
+                .attr("transform", `translate(${marginLeft},0)`)
+                .call(d3.axisLeft(y).tickSize(0).tickPadding(4))
+                .call(g => g.select(".domain").remove());
+
+            let group = svg2.append("g")
+                .selectAll("g")
+                .data(series)
+                .join("g")
+                .attr("transform", d => `translate(0,${y(d.name) + 1})`);
+
+            group.append("path")
+                .attr("fill", (d, i) => d3.interpolateBuGn(totalScores[i] / 100))
+                .attr("d", d => area(d.values));
         });
-        let totalScores = series.map(d => d3.sum(d.values));
-
-        let overlap = 5;
-        let width = 1200;
-        let height = 3000;
-        let marginTop = 100;
-        let marginBottom = 30;
-        let marginRight = 30;
-        let marginLeft = 120;
-
-        let x = d3.scaleLinear()
-            .domain([1, 10])
-            .range([marginLeft, width - marginRight]);
-
-        let y = d3.scalePoint()
-            .domain(series.map(d => d.name))
-            .range([marginTop, height - marginBottom]);
-
-        let z = d3.scaleLinear()
-            .domain([0, d3.max(series, d => d3.max(d.values))]).nice()
-            .range([0, -overlap * y.step() * 0.5])
-
-        let area = d3.area()
-            .curve(d3.curveBasis)
-            .defined(d => !isNaN(d))
-            .x((d, i) => x(HWs[i]))
-            .y0(0)
-            .y1(d => z(d));
-
-        let svg2 = d3.select("#student-table").append("svg")
-            .attr("width", width)
-            .attr("height", height)
-            .attr("viewBox", [0, 0, width, height])
-            .attr("style", "max-width: 100%; height: auto;");
-
-        svg2.append("g")
-            .attr("transform", `translate(0,${height - marginBottom})`)
-            .call(d3.axisBottom(x)
-                .ticks(10)
-                .tickFormat(d => homeworks[d - 1])
-                .tickSizeOuter(0));
-
-        svg2.append("g")
-            .attr("transform", `translate(${marginLeft},0)`)
-            .call(d3.axisLeft(y).tickSize(0).tickPadding(4))
-            .call(g => g.select(".domain").remove());
-
-        let group = svg2.append("g")
-            .selectAll("g")
-            .data(series)
-            .join("g")
-            .attr("transform", d => `translate(0,${y(d.name) + 1})`);
-
-        group.append("path")
-            .attr("fill", (d, i) => d3.interpolateBuGn(totalScores[i] / 100))
-            .attr("d", d => area(d.values));
         </script>
 </body>
 </html>
