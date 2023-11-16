@@ -4,7 +4,7 @@ Reference: https://observablehq.com/@d3/ridgeline-plot?intent=fork`
 )}
 
 function _data(FileAttachment){return(
-FileAttachment("../studentTable.csv").csv()
+FileAttachment("studentTable.csv").csv()
 )}
 
 function _homeworks(){return(
@@ -123,7 +123,7 @@ export default function define(runtime, observer) {
   const main = runtime.module();
   function toString() { return this.url; }
   const fileAttachments = new Map([
-    ["studentTable@2.csv", {url: new URL("./files/f5b7866ceba6683497834020af28cb13764b0339b1f28cf05163a1860f72f2034f73867740b7a0df7e67fe02ec2cbbf898208f188cab72dcc3a53a54e28095ce.csv", import.meta.url), mimeType: "text/csv", toString}]
+    ["studentTable@2.csv", {url: new URL("../studentTable.csv", import.meta.url), mimeType: "text/csv", toString}]
   ]);
   main.builtin("FileAttachment", runtime.fileAttachments(name => fileAttachments.get(name)));
   main.variable(observer()).define(["md"], _1);
