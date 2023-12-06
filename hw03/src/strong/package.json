@@ -1,0 +1,14 @@
+{
+  "name": "9d2142a7ff314736",
+  "main": "9d2142a7ff314736@525.js",
+  "version": "525.0.0",
+  "homepage": "https://observablehq.com/d/9d2142a7ff314736",
+  "author": {
+    "name": "Kiri's Workspace",
+    "url": "https://observablehq.com/@kiri2-ws"
+  },
+  "type": "module",
+  "peerDependencies": {
+    "@observablehq/runtime": "4 - 5"
+  }
+}
