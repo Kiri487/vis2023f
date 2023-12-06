@@ -3,6 +3,19 @@ body {
     margin: 1vh 1vw;
 }
 
+#info {
+    margin: 0 1vw;
+}
+
+#icon {
+    width: 40px;
+    height: 40px;
+    background-image: url(./img/cat.png);
+    background-size: 40px 40px;
+    position: absolute;
+    z-index: 1;
+}
+
 .floors-plan {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -17,8 +30,30 @@ body {
     padding: 5vh 0;
     background-color: #FFFFFF;
     border-radius: 5%;
+    position: relative;
 }
 
 .floor-plan img {
     width: 45vw;
+}
+
+.floor-plan-checkbox {
+    position: relative;
+    z-index: 2;
+}
+
+#trace-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%
+}
+
+.trace-point {
+    width: 20px;
+    height: 20px;
+    background-image: url(./img/leaf.png);
+    background-size: cover;
+    position: absolute;
 }
